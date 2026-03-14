@@ -4,8 +4,8 @@
 #include <iostream>
 
 namespace amjArg{
-  void Help::help(int argc, char *argv[]){
-    if(argc==1){
+  void Help::operator()(int argc, char *argv[]){
+    if(argc<_min_params+1){
       print_help();
       exit(EXIT_SUCCESS);
     }
