@@ -1,4 +1,8 @@
-CPPFLAGS=-Wall -g -fPIC -std=c++11
+ifndef prefix
+  prefix=/op/amj
+endif
+
+CPPFLAGS=-Wall -g -fPIC
 CPP=g++
 
 AMJARG_SRC=amjArg.C
@@ -10,13 +14,13 @@ libamjArg.so: $(AMJARG_OBJ)
 	$(CPP) -shared -Wl,-soname,$@ -o $@ $^
 
 install:
-	mkdir -p /opt/amj/lib
-	mkdir -p /opt/amj/include
-	cp libamjArg.so /opt/amj/lib
-	cp ../include/amjArg.H /opt/amj/include
+	mkdir -p $(prefix)/lib
+	mkdir -p $(prefix)/include
+	cp libamjArg.so $(prefix)/lib
+	cp ../include/amjArg.H $(prefix)/include
 
 uninstall:
-	- /opt/amj/lib/libamjArg.so /opt/amj/include/amjArg.H
+	- $(prefix)/lib/libamjArg.so $(prefix)/include/amjArg.H
 
 clean:
 	- rm -f libamjArg.so $(AMJARG_OBJ)
