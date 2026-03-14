@@ -13,7 +13,7 @@ build: libamjArg.so
 libamjArg.so: $(AMJARG_OBJ)
 	$(CPP) -shared -Wl,-soname,$@ -o $@ $^
 
-install:
+install: build
 	mkdir -p $(prefix)/lib
 	mkdir -p $(prefix)/include
 	cp libamjArg.so $(prefix)/lib
